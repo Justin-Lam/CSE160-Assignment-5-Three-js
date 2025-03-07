@@ -1,4 +1,5 @@
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
+import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 
 let canvas;
 let renderer;
