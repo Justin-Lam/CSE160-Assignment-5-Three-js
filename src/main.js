@@ -4,9 +4,12 @@ let canvas;
 let renderer;
 let scene;
 let camera;
+let textureLoader;
 
 let directionalLight;
-let cubes;
+let cube1;	// lit colored
+let cube2;	// unlit single textured
+let cube3;	// unlit multi textured
 
 function main() {
 	initGlobalVars();
@@ -23,11 +26,27 @@ function main() {
 	const boxHeight = 1;
 	const boxDepth = 1;
 	const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
-	cubes = [
-		createCube(geometry, 0x44aa88,  0),
-		createCube(geometry, 0x8844aa, -2),
-		createCube(geometry, 0xaa8844,  2),
+
+	const material_Cube1 = new THREE.MeshPhongMaterial({color: 0x44aa88});
+	cube1 = new THREE.Mesh(geometry, material_Cube1);
+	cube1.position.x = -1.5;
+	scene.add(cube1);
+
+	const material_Cube2 = new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/wall.jpg")});
+	cube2 = new THREE.Mesh(geometry, material_Cube2);
+	scene.add(cube2);
+
+	const materials_Cube3 = [
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-1.jpg")}),
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-2.jpg")}),
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-3.jpg")}),
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-4.jpg")}),
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-5.jpg")}),
+		new THREE.MeshBasicMaterial({map: loadColorTexture("../assets/flower-6.jpg")})
 	];
+	cube3 = new THREE.Mesh(geometry, materials_Cube3);
+	cube3.position.x = 1.5;
+	scene.add(cube3);
 
 	requestAnimationFrame(tick);
 }
@@ -43,40 +62,32 @@ function initGlobalVars() {
 	const near = 0.1;
 	const far = 5;
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);	// defaults to looking down the -Z axis with +Y up
+
+	textureLoader = new THREE.TextureLoader();
 }
 
-/**
- * @param {THREE.BoxGeometry} geometry
- * @param {number} color in hexadecimal
- * @param {number} x default = 0
- * @param {number} y default = 0
- * @returns {THREE.Mesh}
- */
-function createCube(geometry, color, x = 0, y = 0) {
-	const material = new THREE.MeshPhongMaterial({color});	// MeshBasicMaterial isn't affected by lights
-	const cube = new THREE.Mesh(geometry, material);
-	scene.add(cube);
-	
-	cube.position.x = x;
-	
-	return cube;
+function loadColorTexture(path) {
+	const texture = textureLoader.load(path);
+	texture.colorSpace = THREE.SRGBColorSpace;
+	return texture;
 }
 
 /** @param {number} time end time of the previous frame (in ms) */
 function tick(time) {
 	time /= 1000;
 
-	cubes.forEach((cube, index) => setCubeRotation(cube, index, time));
+	animateCube(cube1, time);
+	animateCube(cube2, time);
+	animateCube(cube3, time);
+
 	renderer.render(scene, camera);
    
 	requestAnimationFrame(tick);
 }
 
-function setCubeRotation(cube, index, time) {
-	const speed = 1 + index * 0.1;
-	const rot = time * speed;
-	cube.rotation.x = rot;
-	cube.rotation.y = rot;
+function animateCube(cube, time) {
+	cube.rotation.x = time;
+	cube.rotation.y = time;
 }
 
 main();
