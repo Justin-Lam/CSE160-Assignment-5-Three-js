@@ -7,17 +7,31 @@ let scene;
 let camera;
 let textureLoader;
 
+let geometry;
+let material;
+
+const x_Axis = new THREE.Vector3(1, 0, 0);
+const y_Axis = new THREE.Vector3(0, 1, 0);
+const z_Axis = new THREE.Vector3(0, 0, 1);
+const degToRad = (d) => d * (Math.PI / 180);
+
 function main() {
 	initGlobalVars();
 
 	camera.position.y = 2;	// back up so we can see the origin
 	camera.position.z = 10;	// back up so we can see the origin
 
-	const geometry = new THREE.CylinderGeometry(1, 1, 2, 3, 1); 
-	const material = new THREE.MeshBasicMaterial({color: 0xffff00}); 
+	geometry = new THREE.PlaneGeometry(100, 100);
+	material = new THREE.MeshBasicMaterial({color: 0xfffff0, side: THREE.DoubleSide});
+	const ground = new THREE.Mesh(geometry, material);
+	ground.rotateOnWorldAxis(x_Axis, degToRad(90))
+	scene.add(ground);
+
+	geometry = new THREE.CylinderGeometry(1, 1, 2, 3, 1); 
+	material = new THREE.MeshBasicMaterial({color: 0xffff00}); 
 	const seesaw_base = new THREE.Mesh(geometry, material);
-	seesaw_base.rotateX(Math.PI/2);
-	seesaw_base.rotateY(Math.PI/3);
+	seesaw_base.rotateOnWorldAxis(y_Axis, degToRad(60));
+	seesaw_base.rotateOnWorldAxis(x_Axis, degToRad(90));
 	scene.add(seesaw_base);
 
 	renderer.render(scene, camera);
