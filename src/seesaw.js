@@ -2,6 +2,9 @@ import * as THREE from "three";	// a namespace import - creates namespace object
 import UTIL from "./utilities.js";
 
 export class Seesaw {
+    animationTilt = 0.25;
+    animationSpeed = 1;
+
     /** @param {THREE.Scene} scene */
     constructor(scene) {
         let geometry;
@@ -29,15 +32,20 @@ export class Seesaw {
     
         seesaw_handle_L.translateX(-1.5);
         seesaw_handle_L.translateY(0.25);
+
         seesaw_handle_R.translateX(1.5);
         seesaw_handle_R.translateY(0.25);
+
         seesaw_board.translateY(0.5);
         seesaw_board.translateZ(1);
         seesaw_board.rotateX(UTIL.degToRad(90));
+        
         seesaw_base.rotateX(UTIL.degToRad(270));
+
+        this.seesaw_board = seesaw_board;
     }
 
     animate(time) {
-
+        this.seesaw_board.rotation.z = (Math.sin(time * this.animationSpeed) * this.animationTilt);
     }
 }

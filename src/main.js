@@ -16,6 +16,8 @@ let textureLoader;
 let geometry;
 let material;
 
+let seesaw;
+
 function main() {
 	initGlobalVars();
 
@@ -29,7 +31,7 @@ function main() {
 	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
 
-	const seesaw = new Seesaw(scene);
+	seesaw = new Seesaw(scene);
 
 	requestAnimationFrame(tick);
 }
@@ -52,6 +54,7 @@ function initGlobalVars() {
 function tick(time) {
 	time /= 1000;
 	
+	seesaw.animate(time);
 	renderer.render(scene, camera);
 
 	requestAnimationFrame(tick);
