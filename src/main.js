@@ -1,5 +1,11 @@
+/*
+	Learned about the various geometries of Three.js from https://threejs-journey.com/lessons/geometries#the-different-built-in-geometries
+*/
+
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import UTIL from "./utilities.js";
+import { Seesaw } from "./seesaw.js";
 
 let canvas;
 let renderer;
@@ -10,31 +16,22 @@ let textureLoader;
 let geometry;
 let material;
 
-const x_Axis = new THREE.Vector3(1, 0, 0);
-const y_Axis = new THREE.Vector3(0, 1, 0);
-const z_Axis = new THREE.Vector3(0, 0, 1);
-const degToRad = (d) => d * (Math.PI / 180);
-
 function main() {
 	initGlobalVars();
 
-	camera.position.y = 2;	// back up so we can see the origin
-	camera.position.z = 10;	// back up so we can see the origin
+	camera.position.x = 0;
+	camera.position.y = 2;
+	camera.position.z = 5;
 
 	geometry = new THREE.PlaneGeometry(100, 100);
 	material = new THREE.MeshBasicMaterial({color: 0xfffff0, side: THREE.DoubleSide});
 	const ground = new THREE.Mesh(geometry, material);
-	ground.rotateOnWorldAxis(x_Axis, degToRad(90))
+	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
 
-	geometry = new THREE.CylinderGeometry(1, 1, 2, 3, 1); 
-	material = new THREE.MeshBasicMaterial({color: 0xffff00}); 
-	const seesaw_base = new THREE.Mesh(geometry, material);
-	seesaw_base.rotateOnWorldAxis(y_Axis, degToRad(60));
-	seesaw_base.rotateOnWorldAxis(x_Axis, degToRad(90));
-	scene.add(seesaw_base);
+	const seesaw = new Seesaw(scene);
 
-	renderer.render(scene, camera);
+	requestAnimationFrame(tick);
 }
 
 /** Creates canvas, renderer, scene, and camera. */
@@ -50,6 +47,14 @@ function initGlobalVars() {
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);	// defaults to looking down the -Z axis with +Y up
 
 	textureLoader = new THREE.TextureLoader();
+}
+
+function tick(time) {
+	time /= 1000;
+	
+	renderer.render(scene, camera);
+
+	requestAnimationFrame(tick);
 }
 
 main();
