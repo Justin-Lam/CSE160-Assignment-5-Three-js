@@ -32,6 +32,7 @@ function main() {
 	scene.add(ground);
 
 	seesaw = new Seesaw(scene);
+	seesaw.translate(2, 0, -2);
 
 	requestAnimationFrame(tick);
 }

@@ -1,3 +1,7 @@
+/*
+    Learned how to do default exporting from ChatGPT and https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/import#namespace_import
+*/
+
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 
 /*
