@@ -19,7 +19,7 @@ export class Seesaw {
 		const base = new THREE.Mesh(geometry, material);
 		this.group.add(base);
 	
-		geometry = new THREE.BoxGeometry(5, 0.25, 1); 
+		geometry = new THREE.BoxGeometry(7.5, 0.25, 1); 
 		material = new THREE.MeshBasicMaterial({color: 0x00f000}); 
 		this.board = new THREE.Mesh(geometry, material);
 		base.add(this.board);
@@ -34,16 +34,17 @@ export class Seesaw {
 		const handle_R = new THREE.Mesh(geometry, material);
 		this.board.add(handle_R);
 	
-		handle_L.translateX(-1.5);
+		handle_L.translateX(-2);
 		handle_L.translateY(0.25);
 
-		handle_R.translateX(1.5);
+		handle_R.translateX(2);
 		handle_R.translateY(0.25);
 
 		this.board.translateY(0.5);
 		this.board.translateZ(1);
 		this.board.rotateX(UTIL.degToRad(90));
 		
+		base.translateY(0.5);
 		base.rotateX(UTIL.degToRad(270));
 	}
 

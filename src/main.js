@@ -11,6 +11,7 @@ import { SwingSet } from "./swingSet.js";
 let canvas;
 let renderer;
 let scene;
+let orbitControls;
 let camera;
 let textureLoader;
 
@@ -34,7 +35,7 @@ function main() {
 	scene.add(ground);
 
 	seesaw = new Seesaw(scene);
-	seesaw.translate(2, 0, 2);
+	seesaw.translate(10, 0, 1);
 
 	swings = new SwingSet(scene);
 	swings.translate(-5, 0, -5);
@@ -54,6 +55,8 @@ function initGlobalVars() {
 	const near = 0.1;
 	const far = 100;
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);	// defaults to looking down the -Z axis with +Y up
+
+	orbitControls = new OrbitControls(camera, canvas);
 
 	textureLoader = new THREE.TextureLoader();
 }
