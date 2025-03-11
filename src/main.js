@@ -6,6 +6,7 @@ import * as THREE from "three";	// a namespace import - creates namespace object
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import UTIL from "./utilities.js";
 import { Seesaw } from "./seesaw.js";
+import { SwingSet } from "./swingSet.js";
 
 let canvas;
 let renderer;
@@ -17,13 +18,14 @@ let geometry;
 let material;
 
 let seesaw;
+let swings;
 
 function main() {
 	initGlobalVars();
 
 	camera.position.x = 0;
 	camera.position.y = 2;
-	camera.position.z = 5;
+	camera.position.z = 10;
 
 	geometry = new THREE.PlaneGeometry(100, 100);
 	material = new THREE.MeshBasicMaterial({color: 0xfffff0, side: THREE.DoubleSide});
@@ -32,7 +34,11 @@ function main() {
 	scene.add(ground);
 
 	seesaw = new Seesaw(scene);
-	seesaw.translate(2, 0, -2);
+	seesaw.translate(2, 0, 2);
+
+	swings = new SwingSet(scene);
+	swings.translate(-5, 0, -5);
+	swings.rotate(0, 30, 0);
 
 	requestAnimationFrame(tick);
 }
