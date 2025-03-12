@@ -1,7 +1,7 @@
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 import UTIL from "./utilities.js";
 
-export class Seesaw {
+export default class Seesaw {
 	animationTilt = 0.25;
 	animationSpeed = 1;
 

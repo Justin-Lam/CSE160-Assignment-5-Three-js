@@ -5,8 +5,9 @@
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
 import UTIL from "./utilities.js";
-import { Seesaw } from "./seesaw.js";
-import { SwingSet } from "./swingSet.js";
+import Seesaw from "./seesaw.js";
+import SwingSet from "./swingSet.js";
+import StreetLight from "./streetlight.js";
 
 let canvas;
 let renderer;
@@ -19,6 +20,7 @@ let geometry;
 let material;
 
 let seesaw;
+let streetLight;
 
 function main() {
 	initGlobalVars();
@@ -67,6 +69,9 @@ function main() {
 	ball3.translateZ(-11);
 	ball3.rotateX(UTIL.degToRad(270));
 
+	streetLight = new StreetLight(scene);
+	streetLight.translate(-4, 0, 6);
+
 	requestAnimationFrame(tick);
 }
 
@@ -87,11 +92,16 @@ function initGlobalVars() {
 	textureLoader = new THREE.TextureLoader();
 }
 
+let prevTime = 0;
 function tick(time) {
 	time /= 1000;
+	const deltaTime = time - prevTime;
 	
 	seesaw.animate(time);
+	streetLight.animate(deltaTime);
 	renderer.render(scene, camera);
+
+	prevTime = time;
 
 	requestAnimationFrame(tick);
 }

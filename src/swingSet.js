@@ -1,7 +1,7 @@
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 import UTIL from "./utilities.js";
 
-export class SwingSet {
+export default class SwingSet {
 	/** @param {THREE.Scene} scene */
 	constructor(scene) {
 		let geometry;
