@@ -4,6 +4,7 @@
 
 import * as THREE from "three";	// a namespace import - creates namespace object THREE containing all exports (due to *) from the module "three"
 import { OrbitControls } from "three/addons/controls/OrbitControls.js";
+import {OBJLoader} from 'three/addons/loaders/OBJLoader.js';
 import UTIL from "./utilities.js";
 import Seesaw from "./seesaw.js";
 import SwingSet from "./swingSet.js";
@@ -15,6 +16,7 @@ let scene;
 let orbitControls;
 let camera;
 let textureLoader;
+let objLoader;
 
 let geometry;
 let material;
@@ -39,7 +41,7 @@ function main() {
 	directionalLight.position.set(-100, 200, -100);
 	scene.add(directionalLight);
 
-	const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+	const ambientLight = new THREE.AmbientLight(0xffffff, 5);	//0.1
 	scene.add(ambientLight);
 
 	const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({map: playgroundSurfaceTexture, side: THREE.DoubleSide}));
@@ -77,6 +79,17 @@ function main() {
 	streetLight = new StreetLight(scene);
 	streetLight.translate(-4, 0, 6);
 
+	objLoader.load("../assets/iPhoneXModel/iPhoneX.obj", root => {
+		// have to do all code in the callback because don't know when it'll finish
+		scene.add(root);
+		root.scale.set(0.005, 0.005, 0.005);
+		root.translateX(0.5);
+		root.translateY(-1.85);
+		root.translateZ(6.5);
+		root.rotateX(UTIL.degToRad(270));
+		root.rotateOnWorldAxis(new THREE.Vector3(0, 1, 0), UTIL.degToRad(345));
+	});
+
 	requestAnimationFrame(tick);
 }
 
@@ -89,13 +102,14 @@ function initGlobalVars() {
 	const fov = 75;
 	const aspect = 2;	// default canvas is 300x150 so its aspect is 2 (300/150)
 	const near = 0.1;
-	const far = 100;
+	const far = 10000;
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);	// defaults to looking down the -Z axis with +Y up
 
 	orbitControls = new OrbitControls(camera, canvas);
 	orbitControls.target.set(0, 5, 0);
 
 	textureLoader = new THREE.TextureLoader();
+	objLoader = new OBJLoader();
 }
 
 let prevTime = 0;
