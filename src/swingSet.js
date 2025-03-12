@@ -9,36 +9,58 @@ export default class SwingSet {
 		scene.add(this.group);
 
 		const topBar = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 10), UTIL.red_Material);
+		topBar.castShadow = true;
+		topBar.receiveShadow = true;
 		this.group.add(topBar);
 
 		const stand_L_Front = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
+		stand_L_Front.castShadow = true;
+		stand_L_Front.receiveShadow = true;
 		topBar.add(stand_L_Front);
 
 		const stand_L_Back = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
+		stand_L_Back.castShadow = true;
+		stand_L_Back.receiveShadow = true;
 		topBar.add(stand_L_Back);
 
 		const stand_R_Front = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
+		stand_R_Front.castShadow = true;
+		stand_R_Front.receiveShadow = true;
 		topBar.add(stand_R_Front);
 
 		const stand_R_Back = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
+		stand_R_Back.castShadow = true;
+		stand_R_Back.receiveShadow = true;
 		topBar.add(stand_R_Back);
 
 		const seat_L_rope_L = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
+		seat_L_rope_L.castShadow = true;
+		seat_L_rope_L.receiveShadow = true;
 		topBar.add(seat_L_rope_L);
 
 		const seat_L_rope_R = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
+		seat_L_rope_R.castShadow = true;
+		seat_L_rope_R.receiveShadow = true;
 		topBar.add(seat_L_rope_R);
 
 		const seat_L = new THREE.Mesh(new THREE.BoxGeometry(2, 0.25, 1), UTIL.green_Material);
+		seat_L.castShadow = true;
+		seat_L.receiveShadow = true;
 		seat_L_rope_L.add(seat_L);
 
 		const seat_R_rope_L = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
+		seat_R_rope_L.castShadow = true;
+		seat_R_rope_L.receiveShadow = true;
 		topBar.add(seat_R_rope_L);
 
 		const seat_R_rope_R = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
+		seat_R_rope_R.castShadow = true;
+		seat_R_rope_R.receiveShadow = true;
 		topBar.add(seat_R_rope_R);
 
 		const seat_R = new THREE.Mesh(new THREE.BoxGeometry(2, 0.25, 1), UTIL.green_Material);
+		seat_R.castShadow = true;
+		seat_R.receiveShadow = true;
 		seat_R_rope_L.add(seat_R);
 
 		stand_L_Front.translateY(-5);

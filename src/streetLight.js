@@ -11,21 +11,28 @@ export default class StreetLight {
 		scene.add(this.group);
 
 		const base_lower = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 0.5), UTIL.dark_Material);
+		base_lower.castShadow = true;
+		base_lower.receiveShadow = true;
 		this.group.add(base_lower);
 
 		const base_upper = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.5), UTIL.dark_Material);
+		base_upper.castShadow = true;
+		base_upper.receiveShadow = true;
 		base_lower.add(base_upper);
 
 		const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.dark_Material);
+		pole.castShadow = true;
+		pole.receiveShadow = true;
 		base_upper.add(pole);
 
-		this.lightRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);
+		this.lightRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);	// don't do shadows because the animation makes them look weird
 		pole.add(this.lightRing1);
 
 		this.lightRing2 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);
 		pole.add(this.lightRing2);
 
-		const pointLight = new THREE.PointLight(0xffe17d, 15, 0, 1);
+		const pointLight = new THREE.PointLight(0xffe17d, 25, 0, 1);
+		pointLight.castShadow = true;
 		pole.add(pointLight);
 		pointLight.translateY(3);
 

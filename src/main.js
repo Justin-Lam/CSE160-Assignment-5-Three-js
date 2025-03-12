@@ -29,13 +29,26 @@ let streetLight;
 function main() {
 	initGlobalVars();
 
+	renderer.shadowMap.enabled = true;
+
+	scene.fog = new THREE.FogExp2(0xDDDDDD, 0.015);
+
 	camera.position.x = 0;
 	camera.position.y = 2;
 	camera.position.z = 10;
 
-	const directionalLight = new THREE.DirectionalLight(0xABD3E1, 2);	// position and target both default to (0, 0, 0)
-	directionalLight.position.set(150, 200, 100);
+	const directionalLight = new THREE.DirectionalLight(0xABD3E1, 5);	// position and target both default to (0, 0, 0)
+	directionalLight.shadow.camera.left = -25;
+	directionalLight.shadow.camera.right = 25;
+	directionalLight.shadow.camera.top = 25;
+	directionalLight.shadow.camera.bottom = -25;
+	directionalLight.shadow.camera.far = 50;
+	directionalLight.castShadow = true;
+	directionalLight.position.set(15, 20, 10);
 	scene.add(directionalLight);
+
+	const cameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
+    scene.add(cameraHelper);
 
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
 	scene.add(ambientLight);
@@ -53,6 +66,7 @@ function main() {
 	playgroundSurfaceTexture.repeat.set(5, 5);
 
 	const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({map: playgroundSurfaceTexture, side: THREE.DoubleSide}));
+	ground.receiveShadow = true;
 	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
 
@@ -65,6 +79,8 @@ function main() {
 
 	geometry = new THREE.SphereGeometry(1, 32, 16, 0, Math.PI);
 	const ball1 = new THREE.Mesh(geometry, UTIL.yellow_Material);
+	ball1.castShadow = true;
+	ball1.receiveShadow = true;
 	scene.add(ball1);
 	ball1.translateX(9);
 	ball1.translateZ(-7);
@@ -72,6 +88,8 @@ function main() {
 
 	geometry = new THREE.SphereGeometry(1.5, 32, 16, 0, Math.PI);
 	const ball2 = new THREE.Mesh(geometry, UTIL.green_Material);
+	ball2.castShadow = true;
+	ball2.receiveShadow = true;
 	scene.add(ball2);
 	ball2.translateX(6);
 	ball2.translateZ(-9);
@@ -79,6 +97,8 @@ function main() {
 
 	geometry = new THREE.SphereGeometry(2, 32, 16, 0, Math.PI);
 	const ball3 = new THREE.Mesh(geometry, UTIL.red_Material);
+	ball3.castShadow = true;
+	ball3.receiveShadow = true;
 	scene.add(ball3);
 	ball3.translateX(10);
 	ball3.translateZ(-11);

@@ -12,15 +12,23 @@ export default class Seesaw {
 		scene.add(this.group);
 
 		const base = new THREE.Mesh(new THREE.CylinderGeometry(1, 1, 1, 3, 1), UTIL.blue_Material);
+		base.castShadow = true;
+		base.receiveShadow = true;
 		this.group.add(base);
 	
 		this.board = new THREE.Mesh(new THREE.BoxGeometry(7.5, 0.25, 1), UTIL.yellow_Material);
+		this.board.castShadow = true;
+		this.board.receiveShadow = true;
 		base.add(this.board);
 	
 		const handle_L = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.5, 1), UTIL.blue_Material);
+		handle_L.castShadow = true;
+		handle_L.receiveShadow = true;
 		this.board.add(handle_L);
 	
 		const handle_R = new THREE.Mesh(new THREE.BoxGeometry(0.25, 0.5, 1), UTIL.blue_Material);
+		handle_R.castShadow = true;
+		handle_R.receiveShadow = true;
 		this.board.add(handle_R);
 	
 		handle_L.translateX(-2);
