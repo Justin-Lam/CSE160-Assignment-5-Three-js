@@ -25,7 +25,7 @@ export default class StreetLight {
 		this.lightRing2 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);
 		pole.add(this.lightRing2);
 
-		const pointLight = new THREE.PointLight(0xffffff, 15, 0, 1);
+		const pointLight = new THREE.PointLight(0xffe17d, 15, 0, 1);
 		pole.add(pointLight);
 		pointLight.translateY(3);
 

@@ -33,18 +33,24 @@ function main() {
 	camera.position.y = 2;
 	camera.position.z = 10;
 
+	const directionalLight = new THREE.DirectionalLight(0xABD3E1, 2);	// position and target both default to (0, 0, 0)
+	directionalLight.position.set(150, 200, 100);
+	scene.add(directionalLight);
+
+	const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
+	scene.add(ambientLight);
+
+	const skyTexture = textureLoader.load("../assets/skyTexture.jpg", () => {
+		skyTexture.mapping = THREE.EquirectangularReflectionMapping;
+		skyTexture.colorSpace = THREE.SRGBColorSpace;
+		scene.background = skyTexture;
+	});
+
 	const playgroundSurfaceTexture = textureLoader.load("../assets/playgroundSurfaceTexture.jpg");
 	playgroundSurfaceTexture.colorSpace = THREE.SRGBColorSpace;
 	playgroundSurfaceTexture.wrapS = THREE.RepeatWrapping;
 	playgroundSurfaceTexture.wrapT = THREE.RepeatWrapping;
 	playgroundSurfaceTexture.repeat.set(5, 5);
-
-	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);	// position and target both default to (0, 0, 0)
-	directionalLight.position.set(-100, 200, -100);
-	scene.add(directionalLight);
-
-	const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
-	scene.add(ambientLight);
 
 	const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({map: playgroundSurfaceTexture, side: THREE.DoubleSide}));
 	ground.rotateX(UTIL.degToRad(90));
@@ -86,6 +92,7 @@ function main() {
 		objLoader.setMaterials(mtl);
 		objLoader.load("../assets/12222_Cat_v1_l3.obj", root => {
 			// have to do all code in the callback because don't know when it'll finish
+			// and idk how to do JS promises or .then() whatever stuffs
 			scene.add(root);
 			root.scale.set(0.05, 0.05, 0.05);
 			root.rotateX(UTIL.degToRad(270));
