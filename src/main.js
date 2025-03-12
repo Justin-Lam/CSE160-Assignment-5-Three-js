@@ -39,12 +39,12 @@ function main() {
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
 	scene.add(ambientLight);
 
-	const skyTexture = textureLoader.load("./assets/skyTexture.jpg");
+	const skyTexture = textureLoader.load("assets/skyTexture.jpg");
 	skyTexture.mapping = THREE.EquirectangularReflectionMapping;
 	skyTexture.colorSpace = THREE.SRGBColorSpace;
 	scene.background = skyTexture;
 
-	const playgroundSurfaceTexture = textureLoader.load("./assets/playgroundSurfaceTexture.jpg");
+	const playgroundSurfaceTexture = textureLoader.load("assets/playgroundSurfaceTexture.jpg");
 	playgroundSurfaceTexture.colorSpace = THREE.SRGBColorSpace;
 	playgroundSurfaceTexture.wrapS = playgroundSurfaceTexture.wrapT = THREE.RepeatWrapping;
 	playgroundSurfaceTexture.repeat.set(5, 5);
@@ -85,16 +85,16 @@ function main() {
 	scene.add(streetLight);
 	streetLight.position.set(-4, 0, 6);
 
-	const treeTexture = textureLoader.load("./assets/tree.png");
+	const treeTexture = textureLoader.load("assets/tree.png");
 	const treeBillboard = new THREE.Sprite(new THREE.SpriteMaterial({map: treeTexture, transparent: true}));
 	scene.add(treeBillboard);
 	treeBillboard.position.set(-10, 5, -25);
 	treeBillboard.scale.set(10, 10, 10);
 
-	mtlLoader.load("./assets/12222_Cat_v1_l3.mtl", mtl => {
+	mtlLoader.load("assets/12222_Cat_v1_l3.mtl", mtl => {
 		mtl.preload();
 		objLoader.setMaterials(mtl);
-		objLoader.load("./assets/12222_Cat_v1_l3.obj", root => {
+		objLoader.load("assets/12222_Cat_v1_l3.obj", root => {
 			// have to do all code in the callback because don't know when it'll finish
 			// and idk how to do JS promises or .then() whatever stuffs
 			scene.add(root);
