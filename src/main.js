@@ -67,12 +67,14 @@ function main() {
 	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
 
-	seesaw = new Seesaw(scene);
-	seesaw.translate(6, 0, 2);
+	seesaw = new Seesaw();
+	scene.add(seesaw);
+	seesaw.position.set(6, 0, 2);
 
-	const swings = new SwingSet(scene);
-	swings.translate(-10, 0, -7);
-	swings.rotate(0, 30, 0);
+	const swings = new SwingSet();
+	scene.add(swings);
+	swings.position.set(-10, 0, -7);
+	swings.rotateY(UTIL.degToRad(30));
 
 	geometry = new THREE.SphereGeometry(1, 32, 16, 0, Math.PI);
 	const ball1 = new THREE.Mesh(geometry, UTIL.yellow_Material);
@@ -101,8 +103,9 @@ function main() {
 	ball3.translateZ(-11);
 	ball3.rotateX(UTIL.degToRad(270));
 
-	streetLight = new StreetLight(scene);
-	streetLight.translate(-4, 0, 6);
+	streetLight = new StreetLight();
+	scene.add(streetLight);
+	streetLight.position.set(-4, 0, 6);
 
 	const treeTexture = textureLoader.load("../assets/tree.png");
 	const treeBillboard = new THREE.Sprite(new THREE.SpriteMaterial({map: treeTexture, transparent: true}));
