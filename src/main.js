@@ -47,9 +47,6 @@ function main() {
 	directionalLight.position.set(15, 20, 10);
 	scene.add(directionalLight);
 
-	const cameraHelper = new THREE.CameraHelper(directionalLight.shadow.camera);
-    scene.add(cameraHelper);
-
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.25);
 	scene.add(ambientLight);
 
@@ -106,6 +103,12 @@ function main() {
 
 	streetLight = new StreetLight(scene);
 	streetLight.translate(-4, 0, 6);
+
+	const treeTexture = textureLoader.load("../assets/tree.png");
+	const treeBillboard = new THREE.Sprite(new THREE.SpriteMaterial({map: treeTexture, transparent: true}));
+	scene.add(treeBillboard);
+	treeBillboard.scale.set(10, 10, 10);
+	treeBillboard.position.set(-10, 5, -25);
 
 	mtlLoader.load("../assets/12222_Cat_v1_l3.mtl", mtl => {
 		mtl.preload();
