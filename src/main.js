@@ -7,7 +7,7 @@ import {OrbitControls} from "three/addons/controls/OrbitControls.js";
 import UTIL from "./utilities.js";
 import Seesaw from "./seesaw.js";
 import SwingSet from "./swingSet.js";
-import StreetLight from "./streetlight.js";
+import StreetLight from "./streetLight.js";
 
 function main() {
 	const canvas = document.getElementById("canvas");

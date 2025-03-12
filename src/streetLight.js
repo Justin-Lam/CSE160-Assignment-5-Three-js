@@ -2,7 +2,7 @@ import * as THREE from "three";	// a namespace import - creates namespace object
 import UTIL from "./utilities.js";
 
 // Learned about groups from https://stackoverflow.com/questions/10776495/is-there-a-container-type-object-in-three-js-to-transform-a-group-of-children
-export default class StreetLight extends THREE.Group{
+export default class StreetLight extends THREE.Group {
 	animationSpeed = 5;
 
 	constructor() {
