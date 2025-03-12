@@ -14,27 +14,31 @@ export default class StreetLight {
 		scene.add(this.group);
 
 		geometry = new THREE.CylinderGeometry(0.75, 0.75, 0.5);
-		material = new THREE.MeshBasicMaterial({color: 0xffff00});
+		material = new THREE.MeshPhongMaterial({color: 0xffff00});
 		const base_lower = new THREE.Mesh(geometry, material);
 		this.group.add(base_lower);
 
 		geometry = new THREE.CylinderGeometry(0.5, 0.5, 0.5);
-		material = new THREE.MeshBasicMaterial({color: 0xfff000});
+		material = new THREE.MeshPhongMaterial({color: 0xfff000});
 		const base_upper = new THREE.Mesh(geometry, material);
 		base_lower.add(base_upper);
 
 		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5);
-		material = new THREE.MeshBasicMaterial({color: 0xfff0f0});
+		material = new THREE.MeshPhongMaterial({color: 0xfff0f0});
 		const pole = new THREE.Mesh(geometry, material);
 		base_upper.add(pole);
 
 		geometry = new THREE.TorusGeometry(0.5, 0.1, 9, 9); 
-		material = new THREE.MeshBasicMaterial( { color: 0x0fff00 } ); 
-		this.light1 = new THREE.Mesh( geometry, material );
-		pole.add(this.light1);
+		material = new THREE.MeshPhongMaterial( { color: 0x0fff00 } ); 
+		this.lightRing1 = new THREE.Mesh( geometry, material );
+		pole.add(this.lightRing1);
 
-		this.light2 = new THREE.Mesh( geometry, material );
-		pole.add(this.light2);
+		this.lightRing2 = new THREE.Mesh( geometry, material );
+		pole.add(this.lightRing2);
+
+		const pointLight = new THREE.PointLight(0xffffff, 15, 0, 1);
+		pole.add(pointLight);
+		pointLight.translateY(3);
 
 		base_lower.translateY(0.25);
 
@@ -42,10 +46,10 @@ export default class StreetLight {
 
 		pole.translateY(2.75);
 
-		this.light1.translateY(3);
+		this.lightRing1.translateY(3);
 
-		this.light2.translateY(3);
-		this.light2.rotateY(UTIL.degToRad(90));
+		this.lightRing2.translateY(3);
+		this.lightRing2.rotateY(UTIL.degToRad(90));
 	}
 
 	translate(x, y, z) {
@@ -55,7 +59,7 @@ export default class StreetLight {
 	}
 
 	animate(deltaTime) {
-		this.light1.rotateOnAxis(new THREE.Vector3(4, 3, 9).normalize(), this.animationSpeed * deltaTime);
-		this.light2.rotateOnAxis(new THREE.Vector3(1, 5, 8).normalize(), this.animationSpeed * deltaTime);
+		this.lightRing1.rotateOnAxis(new THREE.Vector3(4, 3, 9).normalize(), this.animationSpeed * deltaTime);
+		this.lightRing2.rotateOnAxis(new THREE.Vector3(1, 5, 8).normalize(), this.animationSpeed * deltaTime);
 	}
 }

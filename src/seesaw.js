@@ -15,22 +15,22 @@ export default class Seesaw {
 		scene.add(this.group);
 
 		geometry = new THREE.CylinderGeometry(1, 1, 1, 3, 1); 
-		material = new THREE.MeshBasicMaterial({color: 0xffff00}); 
+		material = new THREE.MeshPhongMaterial({color: 0xffff00}); 
 		const base = new THREE.Mesh(geometry, material);
 		this.group.add(base);
 	
 		geometry = new THREE.BoxGeometry(7.5, 0.25, 1); 
-		material = new THREE.MeshBasicMaterial({color: 0x00f000}); 
+		material = new THREE.MeshPhongMaterial({color: 0x00f000}); 
 		this.board = new THREE.Mesh(geometry, material);
 		base.add(this.board);
 	
 		geometry = new THREE.BoxGeometry(0.25, 0.5, 1); 
-		material = new THREE.MeshBasicMaterial({color: 0x00ffff}); 
+		material = new THREE.MeshPhongMaterial({color: 0x00ffff}); 
 		const handle_L = new THREE.Mesh(geometry, material);
 		this.board.add(handle_L);
 	
 		geometry = new THREE.BoxGeometry(0.25, 0.5, 1); 
-		material = new THREE.MeshBasicMaterial({color: 0x00ffff}); 
+		material = new THREE.MeshPhongMaterial({color: 0x00ffff}); 
 		const handle_R = new THREE.Mesh(geometry, material);
 		this.board.add(handle_R);
 	

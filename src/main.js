@@ -29,13 +29,20 @@ function main() {
 	camera.position.y = 2;
 	camera.position.z = 10;
 
+	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);	// position and target both default to (0, 0, 0)
+	directionalLight.position.set(-100, 200, -100);
+	scene.add(directionalLight);
+
+	const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
+	scene.add(ambientLight);
+
 	geometry = new THREE.BoxGeometry(1, 1, 1);
-	material = new THREE.MeshBasicMaterial({color: 0xff0000});
+	material = new THREE.MeshPhongMaterial({color: 0xff0000});
 	const origin = new THREE.Mesh(geometry, material);
 	scene.add(origin);
 
 	geometry = new THREE.PlaneGeometry(100, 100);
-	material = new THREE.MeshBasicMaterial({color: 0xfffff0, side: THREE.DoubleSide});
+	material = new THREE.MeshPhongMaterial({color: 0xfffff0, side: THREE.DoubleSide});
 	const ground = new THREE.Mesh(geometry, material);
 	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
@@ -48,7 +55,7 @@ function main() {
 	swings.rotate(0, 30, 0);
 
 	geometry = new THREE.SphereGeometry(1.5, 32, 16, 0, Math.PI);
-	material = new THREE.MeshBasicMaterial({color: 0xffff00});
+	material = new THREE.MeshPhongMaterial({color: 0xffff00});
 	const ball1 = new THREE.Mesh(geometry, material);
 	scene.add(ball1);
 	ball1.translateX(9);
@@ -88,6 +95,7 @@ function initGlobalVars() {
 	camera = new THREE.PerspectiveCamera(fov, aspect, near, far);	// defaults to looking down the -Z axis with +Y up
 
 	orbitControls = new OrbitControls(camera, canvas);
+	orbitControls.target.set(0, 5, 0);
 
 	textureLoader = new THREE.TextureLoader();
 }
