@@ -11,7 +11,9 @@ const green_Material = new THREE.MeshPhongMaterial({color: 0x58E53F});
 const dark_Material = new THREE.MeshPhongMaterial({color: 0x4B4B4B});
 
 
-const degToRad = (d) => d * (Math.PI / 180);
+function degToRad(degrees) {
+	return degrees * (Math.PI / 180);
+}
 
 export default {
 	blue_Material,

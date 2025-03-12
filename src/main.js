@@ -29,6 +29,12 @@ function main() {
 	camera.position.y = 2;
 	camera.position.z = 10;
 
+	const playgroundSurfaceTexture = textureLoader.load("../assets/playgroundSurfaceTexture.jpg");
+	playgroundSurfaceTexture.colorSpace = THREE.SRGBColorSpace;
+	playgroundSurfaceTexture.wrapS = THREE.RepeatWrapping;
+	playgroundSurfaceTexture.wrapT = THREE.RepeatWrapping;
+	playgroundSurfaceTexture.repeat.set(5, 5);
+
 	const directionalLight = new THREE.DirectionalLight(0xffffff, 1);	// position and target both default to (0, 0, 0)
 	directionalLight.position.set(-100, 200, -100);
 	scene.add(directionalLight);
@@ -36,9 +42,7 @@ function main() {
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 	scene.add(ambientLight);
 
-	geometry = new THREE.PlaneGeometry(100, 100);
-	material = new THREE.MeshPhongMaterial({color: 0xfffff0, side: THREE.DoubleSide});
-	const ground = new THREE.Mesh(geometry, material);
+	const ground = new THREE.Mesh(new THREE.PlaneGeometry(100, 100), new THREE.MeshPhongMaterial({map: playgroundSurfaceTexture, side: THREE.DoubleSide}));
 	ground.rotateX(UTIL.degToRad(90));
 	scene.add(ground);
 
