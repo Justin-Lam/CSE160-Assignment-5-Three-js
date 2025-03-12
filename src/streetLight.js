@@ -5,35 +5,24 @@ export default class StreetLight {
 	animationSpeed = 5;
 
 	/** @param {THREE.Scene} scene */
-	constructor(scene) {
-		let geometry;
-		let material;
-		
+	constructor(scene) {		
 		// Learned about groups from https://stackoverflow.com/questions/10776495/is-there-a-container-type-object-in-three-js-to-transform-a-group-of-children
 		this.group = new THREE.Group()	// use this for transformations to transform the entire object in world space
 		scene.add(this.group);
 
-		geometry = new THREE.CylinderGeometry(0.75, 0.75, 0.5);
-		material = new THREE.MeshPhongMaterial({color: 0xffff00});
-		const base_lower = new THREE.Mesh(geometry, material);
+		const base_lower = new THREE.Mesh(new THREE.CylinderGeometry(0.75, 0.75, 0.5), UTIL.dark_Material);
 		this.group.add(base_lower);
 
-		geometry = new THREE.CylinderGeometry(0.5, 0.5, 0.5);
-		material = new THREE.MeshPhongMaterial({color: 0xfff000});
-		const base_upper = new THREE.Mesh(geometry, material);
+		const base_upper = new THREE.Mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.5), UTIL.dark_Material);
 		base_lower.add(base_upper);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5);
-		material = new THREE.MeshPhongMaterial({color: 0xfff0f0});
-		const pole = new THREE.Mesh(geometry, material);
+		const pole = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.dark_Material);
 		base_upper.add(pole);
 
-		geometry = new THREE.TorusGeometry(0.5, 0.1, 9, 9); 
-		material = new THREE.MeshPhongMaterial( { color: 0x0fff00 } ); 
-		this.lightRing1 = new THREE.Mesh( geometry, material );
+		this.lightRing1 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);
 		pole.add(this.lightRing1);
 
-		this.lightRing2 = new THREE.Mesh( geometry, material );
+		this.lightRing2 = new THREE.Mesh(new THREE.TorusGeometry(0.5, 0.1, 9, 9), UTIL.yellow_Material);
 		pole.add(this.lightRing2);
 
 		const pointLight = new THREE.PointLight(0xffffff, 15, 0, 1);

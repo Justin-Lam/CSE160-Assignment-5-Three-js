@@ -36,11 +36,6 @@ function main() {
 	const ambientLight = new THREE.AmbientLight(0xffffff, 0.1);
 	scene.add(ambientLight);
 
-	geometry = new THREE.BoxGeometry(1, 1, 1);
-	material = new THREE.MeshPhongMaterial({color: 0xff0000});
-	const origin = new THREE.Mesh(geometry, material);
-	scene.add(origin);
-
 	geometry = new THREE.PlaneGeometry(100, 100);
 	material = new THREE.MeshPhongMaterial({color: 0xfffff0, side: THREE.DoubleSide});
 	const ground = new THREE.Mesh(geometry, material);
@@ -54,23 +49,22 @@ function main() {
 	swings.translate(-10, 0, -7);
 	swings.rotate(0, 30, 0);
 
-	geometry = new THREE.SphereGeometry(1.5, 32, 16, 0, Math.PI);
-	material = new THREE.MeshPhongMaterial({color: 0xffff00});
-	const ball1 = new THREE.Mesh(geometry, material);
+	geometry = new THREE.SphereGeometry(1, 32, 16, 0, Math.PI);
+	const ball1 = new THREE.Mesh(geometry, UTIL.yellow_Material);
 	scene.add(ball1);
 	ball1.translateX(9);
 	ball1.translateZ(-7);
 	ball1.rotateX(UTIL.degToRad(270));
 
-	geometry = new THREE.SphereGeometry(1.75, 32, 16, 0, Math.PI);
-	const ball2 = new THREE.Mesh(geometry, material);
+	geometry = new THREE.SphereGeometry(1.5, 32, 16, 0, Math.PI);
+	const ball2 = new THREE.Mesh(geometry, UTIL.green_Material);
 	scene.add(ball2);
 	ball2.translateX(6);
 	ball2.translateZ(-9);
 	ball2.rotateX(UTIL.degToRad(270));
 
 	geometry = new THREE.SphereGeometry(2, 32, 16, 0, Math.PI);
-	const ball3 = new THREE.Mesh(geometry, material);
+	const ball3 = new THREE.Mesh(geometry, UTIL.red_Material);
 	scene.add(ball3);
 	ball3.translateX(10);
 	ball3.translateZ(-11);

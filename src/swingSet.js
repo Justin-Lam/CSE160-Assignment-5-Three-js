@@ -3,67 +3,42 @@ import UTIL from "./utilities.js";
 
 export default class SwingSet {
 	/** @param {THREE.Scene} scene */
-	constructor(scene) {
-		let geometry;
-		let material;
-		
+	constructor(scene) {		
 		// Learned about groups from https://stackoverflow.com/questions/10776495/is-there-a-container-type-object-in-three-js-to-transform-a-group-of-children
 		this.group = new THREE.Group()	// use this for transformations to transform the entire object in world space
 		scene.add(this.group);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 10); 
-		material = new THREE.MeshPhongMaterial({color: 0xffff00}); 
-		const topBar = new THREE.Mesh(geometry, material);
+		const topBar = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 10), UTIL.red_Material);
 		this.group.add(topBar);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5); 
-		material = new THREE.MeshPhongMaterial({color: 0xfff000}); 
-		const stand_L_Front = new THREE.Mesh(geometry, material);
+		const stand_L_Front = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
 		topBar.add(stand_L_Front);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5); 
-		material = new THREE.MeshPhongMaterial({color: 0xfff000}); 
-		const stand_L_Back = new THREE.Mesh(geometry, material);
+		const stand_L_Back = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
 		topBar.add(stand_L_Back);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5); 
-		material = new THREE.MeshPhongMaterial({color: 0xfff000}); 
-		const stand_R_Front = new THREE.Mesh(geometry, material);
+		const stand_R_Front = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
 		topBar.add(stand_R_Front);
 
-		geometry = new THREE.CylinderGeometry(0.25, 0.25, 5); 
-		material = new THREE.MeshPhongMaterial({color: 0xfff000}); 
-		const stand_R_Back = new THREE.Mesh(geometry, material);
+		const stand_R_Back = new THREE.Mesh(new THREE.CylinderGeometry(0.25, 0.25, 5), UTIL.red_Material);
 		topBar.add(stand_R_Back);
 
-		geometry = new THREE.CylinderGeometry(0.1, 0.1, 3); 
-		material = new THREE.MeshPhongMaterial({color: 0x0ffff0}); 
-		const seat_L_rope_L = new THREE.Mesh(geometry, material);
+		const seat_L_rope_L = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
 		topBar.add(seat_L_rope_L);
 
-		geometry = new THREE.CylinderGeometry(0.1, 0.1, 3); 
-		material = new THREE.MeshPhongMaterial({color: 0x0ffff0}); 
-		const seat_L_rope_R = new THREE.Mesh(geometry, material);
+		const seat_L_rope_R = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
 		topBar.add(seat_L_rope_R);
 
-		geometry = new THREE.BoxGeometry(2, 0.25, 1); 
-		material = new THREE.MeshPhongMaterial({color: 0x00f000}); 
-		const seat_L = new THREE.Mesh(geometry, material);
+		const seat_L = new THREE.Mesh(new THREE.BoxGeometry(2, 0.25, 1), UTIL.green_Material);
 		seat_L_rope_L.add(seat_L);
 
-		geometry = new THREE.CylinderGeometry(0.1, 0.1, 3); 
-		material = new THREE.MeshPhongMaterial({color: 0x0ffff0}); 
-		const seat_R_rope_L = new THREE.Mesh(geometry, material);
+		const seat_R_rope_L = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
 		topBar.add(seat_R_rope_L);
 
-		geometry = new THREE.CylinderGeometry(0.1, 0.1, 3); 
-		material = new THREE.MeshPhongMaterial({color: 0x0ffff0}); 
-		const seat_R_rope_R = new THREE.Mesh(geometry, material);
+		const seat_R_rope_R = new THREE.Mesh(new THREE.CylinderGeometry(0.1, 0.1, 3), UTIL.yellow_Material);
 		topBar.add(seat_R_rope_R);
 
-		geometry = new THREE.BoxGeometry(2, 0.25, 1); 
-		material = new THREE.MeshPhongMaterial({color: 0x00f000}); 
-		const seat_R = new THREE.Mesh(geometry, material);
+		const seat_R = new THREE.Mesh(new THREE.BoxGeometry(2, 0.25, 1), UTIL.green_Material);
 		seat_R_rope_L.add(seat_R);
 
 		stand_L_Front.translateY(-5);
