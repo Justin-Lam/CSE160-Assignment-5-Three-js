@@ -1,3 +1,6 @@
+# Notes
+See comments in source code for sources that I learned things from in order to make this project.
+
 # Attribution
 Ground texture downloaded from https://www.texturecan.com/details/385/
 Cat model downloaded from https://free3d.com/3d-model/cat-v1--326682.html
